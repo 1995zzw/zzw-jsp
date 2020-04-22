@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>cross-domain</title>
+</head>
+<script src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
+<body>
+<button onclick="clickButton()">跨域请求</button>
+<div id="test"></div>
+<script>
+    function clickButton() {
+        var el = document.createElement("script");
+        el.src= "http://localhost:8081/cross-domain/jsonpReq";
+        document.body.appendChild(el);
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>cross-domain</title>
+</head>
+<script src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
+<body>
+<script type="text/javascript">
+    $(document).ready(function () {
+        //简单请求
+        $("#test1").click(function () {
+            $.ajax({
+                url: "http://localhost:8081/cross-domain/test1",
+                type: "GET",
+                success: function (data) {
+                    console.log(data)
+                }
+            })
+        });
+
+        //简单请求
+        $("#test2").click(function () {
+            $.ajax({
+                url: "http://localhost:8081/cross-domain/test2",
+                type: "GET",
+                success: function (data) {
+                    console.log(data)
+                }
+            })
+        });
+
+        //复杂请求
+        $("#test3").click(function () {
+            var jsonStr = JSON.stringify({"test": "test"});
+            $.ajax({
+                url: "http://localhost:8081/cross-domain/test3",
+                data:jsonStr,
+                type: "POST",
+                success: function (data) {
+                    console.log(data)
+                },
+                beforeSend:function (head) {
+                    head.setRequestHeader('Content-Type','application/json');
+                }
+            })
+        });
+
+    })
+</script>
+<div style="color: black; background-color: aquamarine" id="test1">
+    简单跨域请求 不进行跨域处理
+</div>
+<div style="color: black; background-color: aquamarine" id="test2">
+    简单跨域请求 进行跨域处理
+</div>
+<div style="color: black; background-color: aquamarine" id="test3">
+    复杂跨域请求
+</div>
+</body>
+</html>
